@@ -4,12 +4,14 @@ PODS:
   - RxCocoa (3.6.1):
     - RxSwift (~> 3.6)
   - RxSwift (3.6.1)
+  - Surge (2.0.0)
 
 DEPENDENCIES:
   - AsyncSwift (~> 2.0)
   - PKHUD (~> 4.0)
   - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
+  - Surge (~> 2.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -17,13 +19,15 @@ SPEC REPOS:
     - PKHUD
     - RxCocoa
     - RxSwift
+    - Surge
 
 SPEC CHECKSUMS:
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
   RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
+  Surge: 1f0286bc5f0fe4283f3455479895bf85c7ef7760
 
-PODFILE CHECKSUM: 3f2eeb7144d3ef51f041a9f4e0794bcb7b79e825
+PODFILE CHECKSUM: 3187c6467df301f530f9605563b22c827e97a18a
 
 COCOAPODS: 1.5.3

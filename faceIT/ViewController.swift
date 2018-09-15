@@ -28,6 +28,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     let model: VNCoreMLModel = try! VNCoreMLModel(for: faces_model().model)
     
+    let data = Dataset()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -179,29 +181,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     private func updateNode(classes: [VNCoreMLFeatureValueObservation], position: SCNVector3, frame: ARFrame) {
         
-        guard let person = classes.first else {
+        guard let observation = classes.first else {
             print("No classification found")
             return
         }
         
-        print("""
-            encoding: \(classes)
-            """ )
-        
-//        let second = classes[1]
-//        let name = person.identifier
-//        print("""
-//            FIRST
-//            confidence: \(person.confidence) for \(person.identifier)
-//            SECOND
-//            confidence: \(second.confidence) for \(second.identifier)
-//
-//            """)
-        if person.confidence < 0.60 {
+        if observation.confidence < 0.60 {
             print("not so sure")
             return
         }
-        let name = "unknown"
+        guard let name = data.find_closest(observation: observation) else {
+            print("not sure")
+            return
+        }
+        
+        print("""
+            observation: \(name)
+            """ )
         // Filter for existent face
         let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp }
             .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }

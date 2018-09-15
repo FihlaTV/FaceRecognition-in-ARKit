@@ -16,6 +16,7 @@
 		2EC9AD451F45DA5300784281 /* SCNVector3+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC9AD441F45DA5300784281 /* SCNVector3+Distance.swift */; };
 		2EC9AD471F46EA1300784281 /* SCNNode+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC9AD461F46EA1300784281 /* SCNNode+Text.swift */; };
 		2EDA02C91F58AE920026EC75 /* faces_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2EDA02C81F58AE8B0026EC75 /* faces_model.mlmodel */; };
+		DCACDDB0214DAE6B006FD4F4 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACDDAF214DAE6B006FD4F4 /* Dataset.swift */; };
 		E67BA293D563E2B1B6C08603 /* Pods_faceIT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3651E17980590E279CE601DE /* Pods_faceIT.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		3651E17980590E279CE601DE /* Pods_faceIT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_faceIT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA678741ACBFB3E5F4568CA /* Pods-faceIT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-faceIT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-faceIT/Pods-faceIT.debug.xcconfig"; sourceTree = "<group>"; };
 		94ABA2E7D430381D56094BD1 /* Pods_faceITUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_faceITUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCACDDAF214DAE6B006FD4F4 /* Dataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
 		F86F8DBBAC165C7236B37B74 /* Pods-faceIT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-faceIT.release.xcconfig"; path = "Pods/Target Support Files/Pods-faceIT/Pods-faceIT.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +102,7 @@
 				2EC9AD441F45DA5300784281 /* SCNVector3+Distance.swift */,
 				2EC9AD461F46EA1300784281 /* SCNNode+Text.swift */,
 				2E246A0E1F4B2A080015CA71 /* Face.swift */,
+				DCACDDAF214DAE6B006FD4F4 /* Dataset.swift */,
 			);
 			path = faceIT;
 			sourceTree = "<group>";
@@ -116,7 +119,6 @@
 				2EBDC7091F0FC72F00243609 /* Frameworks */,
 				2EBDC70A1F0FC72F00243609 /* Resources */,
 				FF35E867F7AF24DE416720F3 /* [CP] Embed Pods Frameworks */,
-				606BBC31316EBD14DC3D204D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -192,24 +194,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		606BBC31316EBD14DC3D204D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-faceIT/Pods-faceIT-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-faceIT/Pods-faceIT-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FF35E867F7AF24DE416720F3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -221,6 +205,7 @@
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Surge/Surge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -228,6 +213,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Surge.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -247,6 +233,7 @@
 				2EBDC7141F0FC72F00243609 /* ViewController.swift in Sources */,
 				2E5C6C421F2F825900749336 /* CIImage+FaceDetection.swift in Sources */,
 				2EDA02C91F58AE920026EC75 /* faces_model.mlmodel in Sources */,
+				DCACDDB0214DAE6B006FD4F4 /* Dataset.swift in Sources */,
 				2EBDC7101F0FC72F00243609 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
