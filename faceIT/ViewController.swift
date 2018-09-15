@@ -198,8 +198,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         print("""
             observation: \(name)
             """ )
+        
+        self.faces.filter({ !$0.hidden}).forEach({face in face.node.hide()})
         // Filter for existent face
-        let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp }
+        let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp}
             .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }
         
         // Create new face
@@ -223,7 +225,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if let displayFace = results.filter({ !$0.hidden }).first  {
                 
                 let distance = displayFace.node.position.distance(toVector: position)
-                if(distance >= 0.03 ) {
+                if(distance >= 0.15 ) {
                     displayFace.node.move(position)
                 }
                 displayFace.timestamp = frame.timestamp

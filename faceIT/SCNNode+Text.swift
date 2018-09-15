@@ -38,9 +38,9 @@ public extension SCNNode {
         
         // IMAGE NODE
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage.init(named: text)
+        material.diffuse.contents = UIImage.init(named: "top-2.png")
         material.isDoubleSided = true
-        let box = SCNBox.init(width: 0.5, height: 0.5, length: 0.01, chamferRadius: 0)
+        let box = SCNBox.init(width: 0.7, height: 0.7, length: 0.7, chamferRadius: 0.1)
         let boxNode = SCNNode(geometry: box)
         box.firstMaterial = material
         boxNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
