@@ -23,7 +23,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var 👜 = DisposeBag()
     
     var faces: [Face] = []
-    
+            
     var bounds: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     
     let model: VNCoreMLModel = try! VNCoreMLModel(for: faces_model().model)
@@ -136,8 +136,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    private func faceClassification(face: VNFaceObservation, image: CIImage, frame: ARFrame) -> Observable<(classes: [VNClassificationObservation], position: SCNVector3, frame: ARFrame)> {
-        return Observable<(classes: [VNClassificationObservation], position: SCNVector3, frame: ARFrame)>.create{ observer in
+    private func faceClassification(face: VNFaceObservation, image: CIImage, frame: ARFrame) -> Observable<(classes: [VNCoreMLFeatureValueObservation], position: SCNVector3, frame: ARFrame)> {
+        return Observable<(classes: [VNCoreMLFeatureValueObservation], position: SCNVector3, frame: ARFrame)>.create{ observer in
             
             // Determine position of the face
             let boundingBox = self.transformBoundingBox(face.boundingBox)
@@ -155,12 +155,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     return
                 }
                 
-                guard let classifications = request.results as? [VNClassificationObservation] else {
+                guard let classifications = request.results as? [VNCoreMLFeatureValueObservation] else {
                     print("No classifications")
                     observer.onCompleted()
                     return
                 }
-                
+//                VNClassificationObservation
                 observer.onNext(classes: classifications, position: worldCoord, frame: frame)
                 observer.onCompleted()
             })
@@ -177,27 +177,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    private func updateNode(classes: [VNClassificationObservation], position: SCNVector3, frame: ARFrame) {
+    private func updateNode(classes: [VNCoreMLFeatureValueObservation], position: SCNVector3, frame: ARFrame) {
         
         guard let person = classes.first else {
             print("No classification found")
             return
         }
         
-        let second = classes[1]
-        let name = person.identifier
         print("""
-            FIRST
-            confidence: \(person.confidence) for \(person.identifier)
-            SECOND
-            confidence: \(second.confidence) for \(second.identifier)
-            
-            """)
-        if person.confidence < 0.60 || person.identifier == "unknown" {
+            encoding: \(classes)
+            """ )
+        
+//        let second = classes[1]
+//        let name = person.identifier
+//        print("""
+//            FIRST
+//            confidence: \(person.confidence) for \(person.identifier)
+//            SECOND
+//            confidence: \(second.confidence) for \(second.identifier)
+//
+//            """)
+        if person.confidence < 0.60 {
             print("not so sure")
             return
         }
-        
+        let name = "unknown"
         // Filter for existent face
         let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp }
             .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }
