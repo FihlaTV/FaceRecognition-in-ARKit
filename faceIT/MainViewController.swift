@@ -16,13 +16,14 @@ import RxCocoa
 import Async
 import PKHUD
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class MainViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
-    
+    @IBOutlet var bottomLabel: UILabel!
     var 👜 = DisposeBag()
     
     var faces: [Face] = []
+    var visibleFaces = 0
             
     var bounds: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     
@@ -36,6 +37,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
         bounds = sceneView.bounds
+        bottomLabel.text = "ToDo for Today: \n1. 2pm meeting at Hall \n2. 9pm General Assembly"
+        bottomLabel.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,9 +69,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 
                 self.faces.filter{ $0.updated.isAfter(seconds: 1.5) && !$0.hidden }.forEach{ face in
                     print("Hide node: \(face.name)")
-                    Async.main { face.node.hide() }
+                    Async.main { self.hideFace(face: face)}
                 }
             }.disposed(by: 👜)
+    }
+    
+    func hideFace(face: Face) {
+        if face.hidden {
+            return
+        }
+        face.node.hide()
+        if self.visibleFaces == 0 {
+            self.bottomLabel.isHidden = true
+        }
+    }
+    
+    func showFace(face: Face) {
+        if !face.hidden {
+            return
+        }
+        face.node.show()
+        self.visibleFaces += 1
+        if self.visibleFaces > 0 {
+            self.bottomLabel.isHidden = false
+        }
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
@@ -199,7 +223,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             observation: \(name)
             """ )
         
-        self.faces.filter({ !$0.hidden}).forEach({face in face.node.hide()})
+        self.faces.filter({ !$0.hidden}).forEach({face in hideFace(face: face)})
         // Filter for existent face
         let results = self.faces.filter{ $0.name == name && $0.timestamp != frame.timestamp}
             .sorted{ $0.node.position.distance(toVector: position) < $1.node.position.distance(toVector: position) }
@@ -210,7 +234,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             Async.main {
                 self.sceneView.scene.rootNode.addChildNode(node)
+//                showFace(face: <#T##Face#>)
                 node.show()
+                self.visibleFaces += 1
+                self.bottomLabel.isHidden = false
                 
             }
             let face = Face.init(name: name, node: node, timestamp: frame.timestamp)
@@ -232,7 +259,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 
             } else {
                 existentFace.node.position = position
-                existentFace.node.show()
+                self.showFace(face: existentFace)
                 existentFace.timestamp = frame.timestamp
             }
         }

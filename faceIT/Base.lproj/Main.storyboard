@@ -1,27 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="faceIT" customModuleProvider="target" sceneMemberID="viewController">
-                    <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BrB-h1-WRS">
+                <viewController id="BV1-FR-VrT" customClass="MainViewController" customModule="faceIT" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xdg-RZ-x9Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="m4w-ZV-KG7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HoU-qs-NKc" customClass="I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </arscnView>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyY-3E-wjg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </arscnView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDo for Today: 1. 2pm meeting at Hall \n 2. 9pm General Assembly" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iC1-Qb-3Qc">
+                                <rect key="frame" x="25" y="478.5" width="325" height="163.5"/>
+                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="35"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MyY-3E-wjg" firstAttribute="bottom" secondItem="m4w-ZV-KG7" secondAttribute="top" id="5dL-Zz-GF2"/>
+                            <constraint firstItem="iC1-Qb-3Qc" firstAttribute="centerX" secondItem="MyY-3E-wjg" secondAttribute="centerX" id="DiY-B2-ca9"/>
+                            <constraint firstItem="MyY-3E-wjg" firstAttribute="leading" secondItem="HoU-qs-NKc" secondAttribute="leading" id="Dq9-56-vuv"/>
+                            <constraint firstItem="iC1-Qb-3Qc" firstAttribute="width" secondItem="MyY-3E-wjg" secondAttribute="width" constant="-50" id="XYw-Zc-rC0"/>
+                            <constraint firstItem="MyY-3E-wjg" firstAttribute="height" secondItem="HoU-qs-NKc" secondAttribute="height" id="agQ-6M-KCf"/>
+                            <constraint firstItem="MyY-3E-wjg" firstAttribute="width" secondItem="HoU-qs-NKc" secondAttribute="width" id="kd6-iI-FYX"/>
+                            <constraint firstItem="iC1-Qb-3Qc" firstAttribute="bottom" secondItem="MyY-3E-wjg" secondAttribute="bottom" constant="-25" id="soW-hl-IVG"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                        <outlet property="bottomLabel" destination="iC1-Qb-3Qc" id="Ylc-gb-FgC"/>
+                        <outlet property="sceneView" destination="MyY-3E-wjg" id="oqL-UB-K6b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="32.833583208395808"/>
         </scene>
     </scenes>
 </document>
